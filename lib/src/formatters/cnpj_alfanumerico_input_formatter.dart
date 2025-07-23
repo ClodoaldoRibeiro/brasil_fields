@@ -3,6 +3,20 @@ import 'package:brasil_fields/src/interfaces/compoundable_formatter.dart';
 
 class CnpjAlfanumericoInputFormatter extends TextInputFormatter
     implements CompoundableFormatter {
+  /// Um [TextInputFormatter] personalizado para entrada de CNPJ com 14 caracteres,
+  /// onde os 12 primeiros aceitam letras maiúsculas e números (alfanuméricos),
+  /// e os 2 últimos aceitam apenas números.
+  ///
+  /// O valor digitado é automaticamente convertido para maiúsculas e formatado com a máscara:
+  /// `XX.XXX.XXX/XXXX-XX`, respeitando a posição dos separadores.
+  ///
+  /// Exemplo de entrada válida: `AB12CDE3F45678`
+  /// Resultado formatado: `AB.12C.DE3/F456-78`
+  ///
+  /// Caracteres inválidos são ignorados durante a digitação.
+  /// A posição do cursor é preservada com base na interação do usuário.
+  const CnpjAlfanumericoInputFormatter();
+
   @override
   int get maxLength => 14;
 
